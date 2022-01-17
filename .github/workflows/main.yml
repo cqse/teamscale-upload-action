@@ -1,0 +1,79 @@
+name: Test
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: '*'
+
+jobs:
+  test-linux-timestamp:
+    runs-on: 'ubuntu-latest'
+    name: 'Test workflow Linux using --branch-and-timestamp'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - uses: 'cqse/teamscale-upload-action@master'
+        with:
+          server: 'https://demo.teamscale.com'
+          project: 'teamscale-upload'
+          user: 'build'
+          partition: 'Github Action > Linux Branch And Timestamp'
+          accesskey: ${{ secrets.ACCESS_KEY }}
+          format: 'SIMPLE'
+          branch-and-timestamp: 'master:HEAD'
+          message: 'This is a test message.'
+          files: 'test_resources/coverage.simple test_resources/coverage2.simple'
+  test-linux-revision:
+    runs-on: 'ubuntu-latest'
+    name: 'Test workflow Linux using --revision'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - uses: 'cqse/teamscale-upload-action@master'
+        with:
+          version: 'latest'
+          server: 'https://demo.teamscale.com'
+          project: 'teamscale-upload'
+          user: 'build'
+          partition: 'Github Action > Linux Revision'
+          accesskey: ${{ secrets.ACCESS_KEY }}
+          format: 'SIMPLE'
+          revision: '36254b47dcbdff2bc06895830aa823cca5a8f861'
+          message: "This is a test message."
+          files: 'test_resources/coverage.simple test_resources/coverage2.simple'
+  test-linux-inputfile:
+    runs-on: 'ubuntu-latest'
+    name: 'Test workflow Linux using revision'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - uses: 'cqse/teamscale-upload-action@master'
+        with:
+          version: 'latest'
+          server: 'https://demo.teamscale.com'
+          project: 'teamscale-upload'
+          user: 'build'
+          partition: 'Github Action > Linux Inputfile'
+          accesskey: ${{ secrets.ACCESS_KEY }}
+          format: 'SIMPLE'
+          revision: '36254b47dcbdff2bc06895830aa823cca5a8f861'
+          message: 'This is a test message.'
+          input: 'test_resources/input_file'
+  test-windows:
+    runs-on: 'windows-2022'
+    name: 'Test workflow Windows'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - uses: 'cqse/teamscale-upload-action@master'
+        with:
+          version: 'latest'
+          server: 'https://demo.teamscale.com'
+          project: 'teamscale-upload'
+          user: 'build'
+          partition: 'Github Action > Windows'
+          accesskey: ${{ secrets.ACCESS_KEY }}
+          format: 'SIMPLE'
+          branch-and-timestamp: 'master:HEAD'
+          message: 'This is a test message.'
+          stacktrace: 'true'
+          insecure: 'true'
+          append-to-message: '1 2 4'
+          input: 'test_resources/input_file'
