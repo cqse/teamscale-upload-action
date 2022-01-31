@@ -27,12 +27,18 @@ inputs:
   revision:
     description: 'The version control commit for which you obtained the report files. E.g. if you obtained a test coverage report in your CI pipeline, then this is the commit the CI pipeline built before running the tests. Can be either a Git SHA1, a SVN revision number or an Team Foundation changeset ID.'
     required: false
+  repository:
+    description: 'When using the revision parameter, this parameter allows to pass a repository name which is used to identify the correct commit in situations where the same revision exists in multiple repositories.'
+    required: false
   branch-and-timestamp:
     description: "The branch and Unix Epoch timestamp for which you obtained the report files. E.g. if you obtained a test coverage report in  your CI pipeline, then this is the branch and the commit timestamp of the commit that the CI pipeline built before
       running the tests. The timestamp must be milliseconds since 00:00:00 UTC Thursday, 1 January 1970 or the string HEAD to upload to the latest revision on that branch. \n
       Format: BRANCH:TIMESTAMP \n
       Example: master:1597845930000 \n
       Example: develop:HEAD"
+    required: false
+  movetolastcommit:
+    description: 'Moves the upload timestamp to right after the last commit.'
     required: false
   message:
     description: 'The message for the commit created in Teamscale for this upload. Will be visible in the Activity perspective. Defaults to a message containing useful meta-information about the upload and the machine performing it.'
@@ -90,7 +96,9 @@ runs:
         ACCESSKEY: ${{ inputs.accesskey }}
         FORMAT: ${{ inputs.format }}
         REVISION: ${{ inputs.revision }}
+        REPOSITORY: ${{ inputs.repository }}
         BRANCH_AND_TIMESTAMP: ${{ inputs.branch-and-timestamp }}
+        MOVETOLASTCOMMIT: ${{ inputs.movetolastcommit }}
         MESSAGE: ${{ inputs.message }}
         INPUT: ${{ inputs.input }}
         INSECURE: ${{ inputs.insecure }}

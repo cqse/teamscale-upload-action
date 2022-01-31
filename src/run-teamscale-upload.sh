@@ -14,6 +14,9 @@ ARGS=( "--server" "$SERVER" "--project" "$PROJECT" "--user" "$USER" "--partition
 if [ -n "$REVISION" ]; then
   ARGS+=( "--commit" "$REVISION" )
 fi
+if [ -n "$REPOSITORY" ]; then
+  ARGS+=( "--repository" "$REPOSITORY" )
+fi
 if [ -n "$BRANCH_AND_TIMESTAMP" ]; then
   ARGS+=( "--branch-and-timestamp" "$BRANCH_AND_TIMESTAMP" )
 fi
@@ -32,6 +35,9 @@ fi
 for linenumber in $APPEND_TO_MESSAGE; do
   ARGS+=( "--append-to-message" "$linenumber" )
 done
+if [[ "$MOVETOLASTCOMMIT" == "true" ]]; then
+  ARGS+=( "--movetolastcommit" )
+fi
 if [[ "$STACKTRACE" == "true" ]]; then
   ARGS+=( "--stacktrace" )
 fi
