@@ -3,9 +3,8 @@ author: 'CQSE'
 description: 'Uploads external analysis results (coverage, findings, …) to Teamscale.'
 inputs:
   version:
-    description: 'The version of teamscale-upload to be used. Must be a tag, e.g. ("latest" or "v.2.3.0")'
-    default: 'latest'
-    required: false
+    description: 'The version of teamscale-upload to be used. Must be a tag, e.g. "v2.3.0" or "latest". Do not use "latest" in a production environment as it might contain breaking changes.'
+    required: true
   server:
     description: 'The url under which the Teamscale server can be reached.'
     required: true
@@ -13,8 +12,8 @@ inputs:
     description: 'The project ID to which to upload the data.'
     required: true
   user:
-      description: 'The username used to perform the upload. Must have the "Perform External Uploads" permission for the given Teamscale project.'
-      required: true
+    description: 'The username used to perform the upload. Must have the "Perform External Uploads" permission for the given Teamscale project.'
+    required: true
   partition:
     description: 'The partition into which the data is inserted in Teamscale. Successive uploads into the same partition will overwrite the data previously inserted there, so use different partitions if you would instead like to merge data from different sources (e.g. one for Findbugs findings and one for JaCoCo coverage).'
     required: true
@@ -37,7 +36,7 @@ inputs:
       Example: master:1597845930000 \n
       Example: develop:HEAD"
     required: false
-  movetolastcommit:
+  move-to-last-commit:
     description: 'Moves the upload timestamp to right after the last commit.'
     required: false
   message:
@@ -98,7 +97,7 @@ runs:
         REVISION: ${{ inputs.revision }}
         REPOSITORY: ${{ inputs.repository }}
         BRANCH_AND_TIMESTAMP: ${{ inputs.branch-and-timestamp }}
-        MOVETOLASTCOMMIT: ${{ inputs.movetolastcommit }}
+        MOVE_TO_LAST_COMMIT: ${{ inputs.move-to-last-commit }}
         MESSAGE: ${{ inputs.message }}
         INPUT: ${{ inputs.input }}
         INSECURE: ${{ inputs.insecure }}

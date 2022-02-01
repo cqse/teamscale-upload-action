@@ -35,8 +35,8 @@ fi
 for linenumber in $APPEND_TO_MESSAGE; do
   ARGS+=( "--append-to-message" "$linenumber" )
 done
-if [[ "$MOVETOLASTCOMMIT" == "true" ]]; then
-  ARGS+=( "--movetolastcommit" )
+if [[ "$MOVE_TO_LAST_COMMIT" == "true" ]]; then
+  ARGS+=( "--move-to-last-commit" )
 fi
 if [[ "$STACKTRACE" == "true" ]]; then
   ARGS+=( "--stacktrace" )
