@@ -14,7 +14,6 @@ jobs:
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
         with:
-          version: 'latest'
           server: 'https://demo.teamscale.com'
           project: 'teamscale-upload'
           user: 'build'
@@ -31,7 +30,6 @@ jobs:
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
         with:
-          version: 'latest'
           server: 'https://demo.teamscale.com'
           project: 'teamscale-upload'
           user: 'build'
@@ -48,7 +46,6 @@ jobs:
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
         with:
-          version: 'latest'
           server: 'https://demo.teamscale.com'
           project: 'teamscale-upload'
           user: 'build'
@@ -65,7 +62,6 @@ jobs:
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
         with:
-          version: 'latest'
           server: 'https://demo.teamscale.com'
           project: 'teamscale-upload'
           user: 'build'

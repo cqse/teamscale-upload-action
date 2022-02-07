@@ -7,9 +7,8 @@ An action for uploading external analysis results (coverage, findings, …) to T
 See [action.yml](action.yml)
 
 ```yaml
-- uses: 'cqse/teamscale-upload-action@v1.0.0'
+- uses: 'cqse/teamscale-upload-action@v2.4.0'
     with:
-      version: 'v2.3.0'
       server: 'https://demo.teamscale.com'
       project: 'teamscale-upload'
       user: 'build'

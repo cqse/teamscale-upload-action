@@ -2,9 +2,6 @@ name: 'Teamscale Upload'
 author: 'CQSE'
 description: 'Uploads external analysis results (coverage, findings, …) to Teamscale.'
 inputs:
-  version:
-    description: 'The version of teamscale-upload to be used. Must be a tag, e.g. "v2.3.0" or "latest". Do not use "latest" in a production environment as it might contain breaking changes.'
-    required: true
   server:
     description: 'The url under which the Teamscale server can be reached.'
     required: true
@@ -73,7 +70,7 @@ runs:
         owner: 'cqse'
         repo: 'teamscale-upload'
         file: 'teamscale-upload-linux.zip'
-        tag: ${{ inputs.version }}
+        tag: $VERSION
         path: '.'
     - id: 'download-windows-binary'
       name: 'Download Windows binary of teamscale-upload'
@@ -82,7 +79,7 @@ runs:
         owner: 'cqse'
         repo: 'teamscale-upload'
         file: 'teamscale-upload-windows.zip'
-        tag: ${{ inputs.version }}
+        tag: $VERSION
         path: '.'
     - id:  'run-teamscale-upload'
       run: "$GITHUB_ACTION_PATH/src/run-teamscale-upload.sh"
@@ -106,3 +103,5 @@ runs:
         STACKTRACE: ${{ inputs.stacktrace }}
         FILES: ${{ inputs.files }}
       shell: 'bash'
+    env:
+      VERSION: 'v2.4.0'
