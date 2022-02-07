@@ -1,6 +1,9 @@
 name: 'Teamscale Upload'
 author: 'CQSE'
 description: 'Uploads external analysis results (coverage, findings, …) to Teamscale.'
+branding:
+  icon: 'upload'
+  color: 'orange'
 inputs:
   server:
     description: 'The url under which the Teamscale server can be reached.'
