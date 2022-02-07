@@ -63,6 +63,10 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - id: 'set-version-number'
+      name: 'Set Version Number'
+      run: echo "VERSION=v2.4.0" >> $GITHUB_ENV
+      shell: bash
     - id: 'download-linux-binary'
       name: 'Download Linux binary of teamscale-upload'
       uses: 'i3h/download-release-asset@v1'
@@ -70,7 +74,7 @@ runs:
         owner: 'cqse'
         repo: 'teamscale-upload'
         file: 'teamscale-upload-linux.zip'
-        tag: $VERSION
+        tag: ${{ env.VERSION }}
         path: '.'
     - id: 'download-windows-binary'
       name: 'Download Windows binary of teamscale-upload'
@@ -79,7 +83,7 @@ runs:
         owner: 'cqse'
         repo: 'teamscale-upload'
         file: 'teamscale-upload-windows.zip'
-        tag: $VERSION
+        tag: ${{ env.VERSION }}
         path: '.'
     - id:  'run-teamscale-upload'
       run: "$GITHUB_ACTION_PATH/src/run-teamscale-upload.sh"
@@ -103,5 +107,3 @@ runs:
         STACKTRACE: ${{ inputs.stacktrace }}
         FILES: ${{ inputs.files }}
       shell: 'bash'
-    env:
-      VERSION: 'v2.4.0'
