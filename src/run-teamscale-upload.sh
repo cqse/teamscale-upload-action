@@ -8,9 +8,12 @@ fi
 chmod +x teamscale-upload;
 
 # mandatory arguments that have to be always present
-ARGS=( "--server" "$SERVER" "--project" "$PROJECT" "--user" "$USER" "--partition" "$PARTITION" "--accesskey" "$ACCESSKEY" "--format" "$FORMAT" )
+ARGS=( "--server" "$SERVER" "--project" "$PROJECT" "--user" "$USER" "--partition" "$PARTITION" "--accesskey" "$ACCESSKEY" )
 
 # optional parameters. We only use them if they have been set
+if [ -n "$FORMAT" ]; then
+  ARGS+=( "--format" "$FORMAT" )
+fi
 if [ -n "$REVISION" ]; then
   ARGS+=( "--commit" "$REVISION" )
 fi
