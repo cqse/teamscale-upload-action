@@ -3,7 +3,7 @@
 if [[ "$OS" == "Windows" ]]; then
   wget -O teamscale-upload.zip https://github.com/cqse/teamscale-upload/releases/download/v2.6.0/teamscale-upload-windows.zip;
 else
-  wget -O teamscale-upload.zip hhttps://github.com/cqse/teamscale-upload/releases/download/v2.6.0/teamscale-upload-linux.zip;
+  wget -O teamscale-upload.zip https://github.com/cqse/teamscale-upload/releases/download/v2.6.0/teamscale-upload-linux.zip;
 fi
 unzip teamscale-upload.zip
 chmod +x teamscale-upload;
