@@ -14,11 +14,11 @@ jobs:
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
         with:
-          server: 'https://demo.teamscale.com'
+          server: 'https://cqse.teamscale.io'
           project: 'teamscale-upload'
           user: 'build'
           partition: 'Github Action > Linux Branch And Timestamp'
-          accesskey: ${{ secrets.TS_DEMO_ACCESSKEY }}
+          accesskey: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
           format: 'SIMPLE'
           branch-and-timestamp: 'master:HEAD'
           message: 'This is a test message.'
@@ -30,11 +30,11 @@ jobs:
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
         with:
-          server: 'https://demo.teamscale.com'
+          server: 'https://cqse.teamscale.io'
           project: 'teamscale-upload'
-          user: 'build'
+          user: 'teamscale-upload-build-test-user'
           partition: 'Github Action > Linux Revision'
-          accesskey: ${{ secrets.TS_DEMO_ACCESSKEY }}
+          accesskey: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
           format: 'SIMPLE'
           revision: '36254b47dcbdff2bc06895830aa823cca5a8f861'
           message: "This is a test message."
@@ -46,11 +46,11 @@ jobs:
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
         with:
-          server: 'https://demo.teamscale.com'
+          server: 'https://cqse.teamscale.io'
           project: 'teamscale-upload'
-          user: 'build'
+          user: 'teamscale-upload-build-test-user'
           partition: 'Github Action > Linux Inputfile'
-          accesskey: ${{ secrets.TS_DEMO_ACCESSKEY }}
+          accesskey: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
           format: 'SIMPLE'
           revision: '36254b47dcbdff2bc06895830aa823cca5a8f861'
           message: 'This is a test message.'
@@ -62,11 +62,11 @@ jobs:
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
         with:
-          server: 'https://demo.teamscale.com'
+          server: 'https://cqse.teamscale.io'
           project: 'teamscale-upload'
-          user: 'build'
+          user: 'teamscale-upload-build-test-user'
           partition: 'Github Action > Windows'
-          accesskey: ${{ secrets.TS_DEMO_ACCESSKEY }}
+          accesskey: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
           format: 'SIMPLE'
           branch-and-timestamp: 'master:HEAD'
           message: 'This is a test message.'
