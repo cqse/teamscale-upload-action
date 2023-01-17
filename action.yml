@@ -82,7 +82,7 @@ runs:
     - id: 'download-windows-binary'
       name: 'Download Windows binary of teamscale-upload'
       uses: 'i3h/download-release-asset@v1.3.3'
-      if: {% raw %}${{ runner.os == 'Windows'}}{% endraw %}
+      if: ${{ runner.os == 'Windows'}}
       with:
         owner: 'cqse'
         repo: 'teamscale-upload'
