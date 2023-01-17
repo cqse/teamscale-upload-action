@@ -1,11 +1,11 @@
 #!/bin/bash
 
 if [[ "$OS" == "Windows" ]]; then
-  wget -O teamscale-upload.zip https://github.com/cqse/teamscale-upload/releases/download/v2.6.0/teamscale-upload-windows.zip;
+  unzip teamscale-upload-windows.zip;
 else
   wget -O teamscale-upload.zip https://github.com/cqse/teamscale-upload/releases/download/v2.6.0/teamscale-upload-linux.zip;
+  unzip teamscale-upload.zip
 fi
-unzip teamscale-upload.zip
 chmod +x teamscale-upload;
 
 # mandatory arguments that have to be always present
