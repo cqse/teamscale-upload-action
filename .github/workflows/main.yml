@@ -16,7 +16,7 @@ jobs:
         with:
           server: 'https://cqse.teamscale.io'
           project: 'teamscale-upload'
-          user: 'build'
+          user: 'teamscale-upload-build-test-user'
           partition: 'Github Action > Linux Branch And Timestamp'
           accesskey: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
           format: 'SIMPLE'
