@@ -80,6 +80,7 @@ runs:
         file: 'teamscale-upload-linux.zip'
         tag: ${{ env.VERSION }}
         path: '.'
+        token: ${{ secrets.GITHUB_TOKEN }}
     - id: 'download-windows-binary'
       name: 'Download Windows binary of teamscale-upload'
       uses: 'i3h/download-release-asset@v1.3.3'
@@ -90,6 +91,7 @@ runs:
         file: 'teamscale-upload-windows.zip'
         tag: ${{ env.VERSION }}
         path: '.'
+        token: ${{ secrets.GITHUB_TOKEN }}
     - id:  'run-teamscale-upload'
       run: "$GITHUB_ACTION_PATH/src/run-teamscale-upload.sh"
       env:
