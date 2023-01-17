@@ -68,7 +68,7 @@ runs:
   steps:
     - id: 'set-version-number'
       name: 'Set Version Number'
-      run: echo "VERSION=v2.4.0" >> $GITHUB_ENV
+      run: echo "VERSION=v2.6.0" >> $GITHUB_ENV
       shell: bash
     - id: 'download-linux-binary'
       name: 'Download Linux binary of teamscale-upload'
