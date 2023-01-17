@@ -72,7 +72,7 @@ runs:
       shell: bash
     - id: 'download-linux-binary'
       name: 'Download Linux binary of teamscale-upload'
-      uses: 'i3h/download-release-asset@v1'
+      uses: 'i3h/download-release-asset@v1.3.3'
       with:
         owner: 'cqse'
         repo: 'teamscale-upload'
@@ -81,7 +81,7 @@ runs:
         path: '.'
     - id: 'download-windows-binary'
       name: 'Download Windows binary of teamscale-upload'
-      uses: 'i3h/download-release-asset@v1'
+      uses: 'i3h/download-release-asset@v1.3.3'
       with:
         owner: 'cqse'
         repo: 'teamscale-upload'
