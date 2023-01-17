@@ -73,6 +73,7 @@ runs:
     - id: 'download-linux-binary'
       name: 'Download Linux binary of teamscale-upload'
       uses: 'i3h/download-release-asset@v1.3.3'
+      if: ${{ runner.os == 'Linux'}}
       with:
         owner: 'cqse'
         repo: 'teamscale-upload'
