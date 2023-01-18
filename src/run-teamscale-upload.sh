@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [[ "$OS" == "Windows" ]]; then
-  unzip teamscale-upload-windows.zip;
+  curl -L https://github.com/cqse/teamscale-upload/releases/download/v2.6.0/teamscale-upload-windows.zip -o teamscale-upload.zip
+  unzip teamscale-upload.zip;
 else
   wget -O teamscale-upload.zip https://github.com/cqse/teamscale-upload/releases/download/v2.6.0/teamscale-upload-linux.zip;
   unzip teamscale-upload.zip
