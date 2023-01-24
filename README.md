@@ -15,7 +15,6 @@ See [action.yml](action.yml)
       partition: 'Github Action > Linux Branch And Timestamp'
       accesskey: ${{ secrets.ACCESS_KEY }}
       format: 'SIMPLE'
-      branch-and-timestamp: 'master:HEAD'
       message: 'This is a test message.'
       files: 'test_resources/coverage.simple test_resources/coverage2.simple'
 ```
