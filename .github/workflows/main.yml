@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: 'actions/checkout@v2'
 # run the test only if the secret access key is present in the gitlab repository (i.e., not in clones of our main repo) because the test would fail without access key.
-      - if: ${{ TEAMSCALE_ACCESS_KEY != '' }}
+      - if: ${{ env.TEAMSCALE_ACCESS_KEY != '' }}
         uses: 'cqse/teamscale-upload-action@master'
         with:
           server: 'https://cqse.teamscale.io'
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: 'actions/checkout@v2'
 # run the test only if the secret access key is present in the gitlab repository (i.e., not in clones of our main repo) because the test would fail without access key.
-      - if: ${{ TEAMSCALE_ACCESS_KEY != '' }}
+      - if: ${{ env.TEAMSCALE_ACCESS_KEY != '' }}
         uses: 'cqse/teamscale-upload-action@master'
         with:
           server: 'https://cqse.teamscale.io'
