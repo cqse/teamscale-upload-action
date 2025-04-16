@@ -10,7 +10,10 @@ jobs:
   test-linux-timestamp:
     runs-on: 'ubuntu-latest'
     name: 'Test workflow Linux using --branch-and-timestamp'
+    env: TEAMSCALE_ACCESS_KEY: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
+    accesskey: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
     steps:
+      - if: ${{ env.TEAMSCALE_ACCESS_KEY }} != null
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
         with:
