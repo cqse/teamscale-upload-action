@@ -7,16 +7,22 @@ on:
     branches: '*'
 
 jobs:
-  test-linux-timestamp:
+  check-access-key-availablity:
     runs-on: 'ubuntu-latest'
-    name: 'Test workflow Linux using --branch-and-timestamp'
+    name: 'Check whether secret Teamscale access key is available'
     env:
       TEAMSCALE_ACCESS_KEY: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
     steps:
+      - if: ${{ env.TEAMSCALE_ACCESS_KEY == '' }}
+        run: |
+          echo "Secret Teamscale access key is not available. The tests will fail if not executed in the main repository where the secrets are available."
+          exit 1
+  test-linux-timestamp:
+    runs-on: 'ubuntu-latest'
+    name: 'Test workflow Linux using --branch-and-timestamp'
+    steps:
       - uses: 'actions/checkout@v2'
-# run the test only if the secret access key is present in the gitlab repository (i.e., not in clones of our main repo) because the test would fail without access key.
-      - if: ${{ env.TEAMSCALE_ACCESS_KEY != '' }}
-        uses: 'cqse/teamscale-upload-action@master'
+      - uses: 'cqse/teamscale-upload-action@master'
         with:
           server: 'https://cqse.teamscale.io'
           project: 'teamscale-upload'
@@ -32,9 +38,7 @@ jobs:
     name: 'Test workflow Linux using --revision'
     steps:
       - uses: 'actions/checkout@v2'
-# run the test only if the secret access key is present in the gitlab repository (i.e., not in clones of our main repo) because the test would fail without access key.
-      - if: ${{ env.TEAMSCALE_ACCESS_KEY != '' }}
-        uses: 'cqse/teamscale-upload-action@master'
+      - uses: 'cqse/teamscale-upload-action@master'
         with:
           server: 'https://cqse.teamscale.io'
           project: 'teamscale-upload'
@@ -47,7 +51,7 @@ jobs:
           files: 'test_resources/coverage.simple test_resources/coverage2.simple'
   test-linux-inputfile:
     runs-on: 'ubuntu-latest'
-    name: 'Test workflow Linux using revision/inputfile'
+    name: 'Test workflow Linux using revision'
     steps:
       - uses: 'actions/checkout@v2'
       - uses: 'cqse/teamscale-upload-action@master'
