@@ -17,7 +17,7 @@ if [ -n "$FORMAT" ]; then
   ARGS+=( "--format" "$FORMAT" )
 fi
 if [ -n "$REVISION" ]; then
-  ARGS+=( "--commit" "$REVISION" )
+  ARGS+=( "--commit###" "$REVISION" )
 fi
 if [ -n "$REPOSITORY" ]; then
   ARGS+=( "--repository" "$REPOSITORY" )
