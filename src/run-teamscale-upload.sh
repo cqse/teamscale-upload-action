@@ -43,8 +43,8 @@ fi
 
 # Transforming the space separated parameter into multiple single-value parameters. This is necessary, since it is not
 # possible in a Github Action to specify the same parameter multiple times as we do for teamscale-upload.
-for linenumber in $APPEND_TO_MESSAGE; do
-  ARGS+=( "--append-to-message" "$linenumber" )
+for line in $APPEND_TO_MESSAGE; do
+  ARGS+=( "--append-to-message" "$line" )
 done
 
 # Transforming the space separated filenames into an array of filenames
