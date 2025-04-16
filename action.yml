@@ -21,7 +21,7 @@ inputs:
     description: 'The partition into which the data is inserted in Teamscale. Successive uploads into the same partition will overwrite the data previously inserted there, so use different partitions if you would instead like to merge data from different sources (e.g. one for Findbugs findings and one for JaCoCo coverage).'
     required: true
   format:
-    description: 'The file format of the reports which are specified as command line arguments. See http://cqse.eu/upload-formats for a full list of supported file formats.'
+    description: 'The file format of the reports which are specified as command line arguments. See http://cqse.eu/upload-formats for a full list of supported file formats. A report format must be supplied for each report file, either via --format or via --input.'
     required: false
   revision:
     description: 'The version control commit for which you obtained the report files. E.g. if you obtained a test coverage report in your CI pipeline, then this is the commit the CI pipeline built before running the tests. Can be either a Git SHA1, a SVN revision number or an Team Foundation changeset ID.'
@@ -43,7 +43,7 @@ inputs:
     description: 'The message for the commit created in Teamscale for this upload. Will be visible in the Activity perspective. Defaults to a message containing useful meta-information about the upload and the machine performing it.'
     required: false
   input:
-    description: 'A file which contains additional report file patterns.'
+    description: 'A file which contains additional report file patterns. A report format must be supplied for each report file, either via --format or via --input.'
     required: false
   insecure:
     description: 'Causes SSL certificates to be accepted without validation, which makes using this tool with self-signed or invalid certificates easier.'
