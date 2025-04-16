@@ -7,6 +7,16 @@ on:
     branches: '*'
 
 jobs:
+  check-access-key-availablity:
+    runs-on: 'ubuntu-latest'
+    name: 'Check whether secret Teamscale access key is available'
+    env:
+      TEAMSCALE_ACCESS_KEY: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
+    steps:
+      - if: ${{ env.TEAMSCALE_ACCESS_KEY == '' }}
+        run: |
+          echo "Secret Teamscale access key is not available. The tests will fail if not executed in the main repository where the secrets are available."
+          exit 1
   test-linux-timestamp:
     runs-on: 'ubuntu-latest'
     name: 'Test workflow Linux using --branch-and-timestamp'
