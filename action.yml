@@ -36,9 +36,6 @@ inputs:
       Example: master:1597845930000 \n
       Example: develop:HEAD"
     required: false
-  move-to-last-commit:
-    description: 'Moves the upload timestamp to right after the last commit.'
-    required: false
   message:
     description: 'The message for the commit created in Teamscale for this upload. Will be visible in the Activity perspective. Defaults to a message containing useful meta-information about the upload and the machine performing it.'
     required: false
@@ -86,7 +83,6 @@ runs:
         REVISION: ${{ inputs.revision }}
         REPOSITORY: ${{ inputs.repository }}
         BRANCH_AND_TIMESTAMP: ${{ inputs.branch-and-timestamp }}
-        MOVE_TO_LAST_COMMIT: ${{ inputs.move-to-last-commit }}
         MESSAGE: ${{ inputs.message }}
         INPUT: ${{ inputs.input }}
         INSECURE: ${{ inputs.insecure }}

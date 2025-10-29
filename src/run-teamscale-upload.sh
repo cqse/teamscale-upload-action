@@ -25,9 +25,6 @@ fi
 if [ -n "$BRANCH_AND_TIMESTAMP" ]; then
   ARGS+=( "--branch-and-timestamp" "$BRANCH_AND_TIMESTAMP" )
 fi
-if [[ "$MOVE_TO_LAST_COMMIT" == "true" ]]; then
-  ARGS+=( "--move-to-last-commit" )
-fi
 if [ -n "$MESSAGE" ]; then
   ARGS+=( "--message" "${MESSAGE}" )
 fi
