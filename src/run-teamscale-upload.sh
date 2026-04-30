@@ -1,13 +1,15 @@
 #!/bin/bash
 
 if [[ "$OS" == "Windows" ]]; then
-  curl -L https://github.com/cqse/teamscale-upload/releases/download/v2.9.13/teamscale-upload-windows.zip -o teamscale-upload.zip
+  curl -L https://github.com/cqse/teamscale-upload/releases/download/v2.9.13/teamscale-upload-windows-x86_64.zip -o teamscale-upload.zip
   unzip teamscale-upload.zip;
+  LAUNCHER="./teamscale-upload/bin/teamscale-upload.bat"
 else
-  wget -O teamscale-upload.zip https://github.com/cqse/teamscale-upload/releases/download/v2.9.13/teamscale-upload-linux.zip;
+  wget -O teamscale-upload.zip https://github.com/cqse/teamscale-upload/releases/download/v2.9.13/teamscale-upload-linux-x86_64.zip;
   unzip teamscale-upload.zip
+  LAUNCHER="./teamscale-upload/bin/teamscale-upload"
+  chmod +x "$LAUNCHER"
 fi
-chmod +x teamscale-upload;
 
 # mandatory arguments that have to be always present
 ARGS=( "--server" "$SERVER" "--project" "$PROJECT" "--user" "$USER" "--accesskey" "$ACCESSKEY" "--partition" "$PARTITION" )
@@ -55,4 +57,4 @@ if [ -n "$TIMEOUT" ]; then
   ARGS+=( "--timeout" "${TIMEOUT}" )
 fi
 
-./teamscale-upload "${ARGS[@]}"
+"$LAUNCHER" "${ARGS[@]}"
