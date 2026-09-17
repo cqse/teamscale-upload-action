@@ -15,18 +15,21 @@ function require_input_for_command() {
   local input_name="$1"
   local input_value="$2"
   if [ -z "$input_value" ]; then
+    if [ -z "$COMMAND" ]; then
+      fail "The '$input_name' input is required."
+    fi
     fail "The '$input_name' input is required by the '$COMMAND' command."
   fi
 }
 
-# action.yml defaults this to 'report', but a workflow can also pass the input explicitly as empty.
-if [ -z "$COMMAND" ]; then
-  COMMAND="report"
-fi
-
 # Inputs that belong to the other command are not passed on to teamscale-upload and are ignored.
 case "$COMMAND" in
-  report)
+  ""|report)
+    # teamscale-upload uploads external analysis reports when no command is named, so the `report`
+    # command is left out deliberately and the tool's default runs. Naming it explicitly is planned
+    # for later after the default command is deprecated. Blanked before the checks below so
+    # their message does not name a command that is never sent.
+    COMMAND=""
     require_input_for_command "partition" "$PARTITION"
     ;;
   vulnerability-report)
@@ -53,8 +56,12 @@ else
   chmod +x "$LAUNCHER"
 fi
 
-# the command to run and the arguments that every command shares
-ARGS=( "$COMMAND" "--server" "$SERVER" "--project" "$PROJECT" "--user" "$USER" "--accesskey" "$ACCESSKEY" )
+# the command to run, if it is named at all, and the arguments that every command shares.
+# $COMMAND is unquoted on purpose: an empty value must expand to no argument at all rather than to
+# an empty one, which teamscale-upload would read as an empty report pattern. This is safe because
+# the case above has narrowed $COMMAND to a fixed command name or the empty string.
+# shellcheck disable=SC2086
+ARGS=( $COMMAND "--server" "$SERVER" "--project" "$PROJECT" "--user" "$USER" "--accesskey" "$ACCESSKEY" )
 
 if [ -n "$REVISION" ]; then
   ARGS+=( "--commit" "$REVISION" )

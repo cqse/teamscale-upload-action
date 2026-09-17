@@ -6,9 +6,9 @@ branding:
   color: 'orange'
 inputs:
   command:
-    description: 'What kind of data to upload. `report` uploads external analysis results (coverage, findings, …) into a partition. `vulnerability-report` uploads a vulnerability report, e.g. a Software Bill of Materials (SBOM), for a build name and version. Requires Teamscale 2026.7.0 or later.'
+    description: 'What kind of data to upload. Leave it unset (or set value to `report`) in order to upload external analysis results (coverage, findings, …) into a partition. `vulnerability-report` uploads a vulnerability report, e.g. a Software Bill of Materials (SBOM), for a build name and version. Requires Teamscale 2026.7.0 or later.'
     required: false
-    default: 'report'
+    default: ''
   server:
     description: 'The url under which the Teamscale server can be reached.'
     required: true
@@ -81,7 +81,7 @@ runs:
   steps:
     - id: 'set-version-number'
       name: 'Set Version Number'
-      run: echo "VERSION=v3.0.0" >> $GITHUB_ENV
+      run: echo "VERSION=v2.11.0" >> $GITHUB_ENV
       shell: bash
     - id:  'run-teamscale-upload'
       run: "$GITHUB_ACTION_PATH/src/run-teamscale-upload.sh"

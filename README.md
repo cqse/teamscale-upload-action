@@ -6,12 +6,12 @@ An action for uploading external analysis results (coverage, findings, …) and 
 
 See [action.yml](action.yml) for all available inputs.
 
-The `command` input selects what to upload. It defaults to `report`, so existing workflows keep working unchanged.
+The `command` input selects what to upload. Leave it unset to upload external analysis results, so existing workflows keep working unchanged.
 
 ## Uploading external analysis results
 
 ```yaml
-- uses: 'cqse/teamscale-upload-action@v3.0.0'
+- uses: 'cqse/teamscale-upload-action@v2.11.0'
     with:
       server: 'https://cqse.teamscale.io'
       project: 'teamscale-upload'
@@ -30,7 +30,7 @@ Uploads a vulnerability report, e.g. a Software Bill of Materials (SBOM). Requir
 Teamscale stores one report per `build-name` and `build-version`, so `files` must resolve to exactly one file. Uploading again with the same `build-name` and `build-version` overwrites the previously uploaded report. Neither may contain `#`, which Teamscale uses internally as a separator.
 
 ```yaml
-- uses: 'cqse/teamscale-upload-action@v3.0.0'
+- uses: 'cqse/teamscale-upload-action@v2.11.0'
     with:
       command: 'vulnerability-report'
       server: 'https://cqse.teamscale.io'
