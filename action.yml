@@ -22,16 +22,16 @@ inputs:
     description: 'The IDE access key of the given user. Can be retrieved in Teamscale under Admin > Users.'
     required: true
   partition:
-    description: 'Only when uploading external analysis results. The partition into which the data is inserted in Teamscale. Successive uploads into the same partition will overwrite the data previously inserted there, so use different partitions if you would instead like to merge data from different sources (e.g. one for Findbugs findings and one for JaCoCo coverage).'
+    description: 'Required only when uploading external analysis results. The partition into which the data is inserted in Teamscale. Successive uploads into the same partition will overwrite the data previously inserted there, so use different partitions if you would instead like to merge data from different sources (e.g. one for Findbugs findings and one for JaCoCo coverage).'
     required: false
   build-name:
-    description: 'Only when uploading a vulnerability report, where it is required. The name identifying the build this vulnerability report belongs to, e.g. the name of the service or component that was built. Must not contain `#`.'
+    description: 'Required only when uploading a vulnerability report. The name identifying the build this vulnerability report belongs to, e.g. the name of the service or component that was built. Must not contain `#`.'
     required: false
   build-version:
-    description: 'Only when uploading a vulnerability report, where it is required. The version (e.g. the build number) identifying this upload within the build. Uploading again with the same build-name and build-version overwrites the previously uploaded report. Must not contain `#`.'
+    description: 'Required only when uploading a vulnerability report. The version (e.g. the build number) identifying this upload within the build. Uploading again with the same build-name and build-version overwrites the previously uploaded report. Must not contain `#`.'
     required: false
   format:
-    description: 'Only when uploading external analysis results. The file format of the reports which are specified as command line arguments. See http://cqse.eu/upload-formats for a full list of supported file formats. A report format must be supplied for each report file, either via --format or via --input.'
+    description: 'Only when uploading external analysis results, where it is required if you pass report patterns via the files input rather than via the input parameter. The file format of the reports which are specified as command line arguments. See http://cqse.eu/upload-formats for a full list of supported file formats. A report format must be supplied for each report file, either via --format or via --input.'
     required: false
   revision:
     description: 'The version control commit for which you obtained the report files. E.g. if you obtained a test coverage report in your CI pipeline, then this is the commit the CI pipeline built before running the tests. Can be either a Git SHA1, a SVN revision number or an Team Foundation changeset ID.'
