@@ -6,7 +6,7 @@ branding:
   color: 'orange'
 inputs:
   command:
-    description: 'What kind of data to upload. Leave it unset (or set value to `report`) in order to upload external analysis results (coverage, findings, …) into a partition. `vulnerability-report` uploads a vulnerability report, e.g. a Software Bill of Materials (SBOM), for a build name and version. Requires Teamscale 2026.7.0 or later.'
+    description: 'What kind of data to upload. Leave it unset in order to upload external analysis results (coverage, findings, …) into a partition. `vulnerability-report` uploads a vulnerability report, e.g. a Software Bill of Materials (SBOM), for a build name and version. Requires Teamscale 2026.7.0 or later.'
     required: false
     default: ''
   server:
