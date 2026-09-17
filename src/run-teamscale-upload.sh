@@ -65,37 +65,46 @@ else
   chmod +x "$LAUNCHER"
 fi
 
-# the command to run, if it is named at all, and the arguments that every command shares.
+# Shared options, in the order of CommonCommandLineOptions.addCommonArguments. Keep action.yml in step.
+# Two deviations from that list, both older than the commands: the tool's -c/--commit is the
+# 'revision' input, and --proxy, --max-attempts and --debug have no input at all.
+#
 # $COMMAND is unquoted on purpose: an empty value must expand to no argument at all rather than to
 # an empty one, which teamscale-upload would read as an empty report pattern. This is safe because
 # the case above has narrowed $COMMAND to a fixed command name or the empty string.
 # shellcheck disable=SC2086
 ARGS=( $COMMAND "--server" "$SERVER" "--project" "$PROJECT" "--user" "$USER" "--accesskey" "$ACCESSKEY" )
 
-if [ -n "$REVISION" ]; then
-  ARGS+=( "--commit" "$REVISION" )
-fi
 if [[ "$INSECURE" == "true" ]]; then
   ARGS+=( "--insecure" )
 fi
 if [ -n "$TRUSTED_KEYSTORE" ]; then
   ARGS+=( "--trusted-keystore" "${TRUSTED_KEYSTORE}" )
 fi
-if [[ "$STACKTRACE" == "true" ]]; then
-  ARGS+=( "--stacktrace" )
-fi
 if [ -n "$TIMEOUT" ]; then
   ARGS+=( "--timeout" "${TIMEOUT}" )
 fi
+if [[ "$STACKTRACE" == "true" ]]; then
+  ARGS+=( "--stacktrace" )
+fi
 
 if [[ "$COMMAND" == "vulnerability-report" ]]; then
+  # Vulnerability report options, in the order of VulnerabilityReportCommandLineOptions.addCommand.
   ARGS+=( "--build-name" "$BUILD_NAME" "--build-version" "$BUILD_VERSION" )
+
+  if [ -n "$REVISION" ]; then
+    ARGS+=( "--commit" "$REVISION" )
+  fi
 else
+  # Report options, in the order of ReportCommandLineOptions.addCommand.
   ARGS+=( "--partition" "$PARTITION" )
 
   # optional parameters. We only use them if they have been set
   if [ -n "$FORMAT" ]; then
     ARGS+=( "--format" "$FORMAT" )
+  fi
+  if [ -n "$REVISION" ]; then
+    ARGS+=( "--commit" "$REVISION" )
   fi
   if [ -n "$REPOSITORY" ]; then
     ARGS+=( "--repository" "$REPOSITORY" )
