@@ -84,3 +84,36 @@ jobs:
           insecure: 'true'
           append-to-message: '1 2 4'
           input: 'test_resources/input_file'
+  test-linux-vulnerability-report:
+    runs-on: 'ubuntu-latest'
+    name: 'Test workflow Linux using the vulnerability-report command'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - uses: 'cqse/teamscale-upload-action@master'
+        with:
+          command: 'vulnerability-report'
+          server: 'https://cqse.teamscale.io'
+          project: 'teamscale-upload'
+          user: 'teamscale-upload-build-test-user'
+          accesskey: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
+          build-name: 'Github Action > Linux Vulnerability Report'
+          build-version: ${{ github.run_number }}
+          revision: '36254b47dcbdff2bc06895830aa823cca5a8f861'
+          files: 'test_resources/bom.json'
+  test-windows-vulnerability-report:
+    runs-on: 'windows-2022'
+    name: 'Test workflow Windows using the vulnerability-report command'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - uses: 'cqse/teamscale-upload-action@master'
+        with:
+          command: 'vulnerability-report'
+          server: 'https://cqse.teamscale.io'
+          project: 'teamscale-upload'
+          user: 'teamscale-upload-build-test-user'
+          accesskey: ${{ secrets.TEAMSCALE_ACCESS_KEY }}
+          build-name: 'Github Action > Windows Vulnerability Report'
+          build-version: ${{ github.run_number }}
+          revision: '36254b47dcbdff2bc06895830aa823cca5a8f861'
+          files: 'test_resources/bom.json'
+          stacktrace: 'true'
