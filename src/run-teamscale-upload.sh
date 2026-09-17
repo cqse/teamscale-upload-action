@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 # Fails the action with the given message.
 function fail() {
   echo "::error::$1"
@@ -55,7 +53,7 @@ case "$COMMAND" in
 esac
 
 if [[ "$OS" == "Windows" ]]; then
-  curl -fL "https://github.com/cqse/teamscale-upload/releases/download/$VERSION/teamscale-upload-windows-x86_64.zip" -o teamscale-upload.zip
+  curl -L "https://github.com/cqse/teamscale-upload/releases/download/$VERSION/teamscale-upload-windows-x86_64.zip" -o teamscale-upload.zip
   unzip teamscale-upload.zip;
   LAUNCHER="./teamscale-upload/bin/teamscale-upload.bat"
 else
