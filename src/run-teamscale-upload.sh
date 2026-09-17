@@ -22,6 +22,9 @@ function require_input_for_command() {
   fi
 }
 
+# Transforming the space separated filenames into an array of filenames
+read -r -a FILES_ARRAY <<< "$FILES"
+
 # Inputs that belong to the other command are not passed on to teamscale-upload and are ignored.
 case "$COMMAND" in
   ""|report)
@@ -39,6 +42,12 @@ case "$COMMAND" in
     # report, and teamscale-upload would report the report missing as a missing positional
     # argument, which does not tell the user which action input to set.
     require_input_for_command "files" "$FILES"
+    # Teamscale stores one report per build name and version, so the upload takes a single
+    # positional argument. Passing several would reach teamscale-upload as unrecognized arguments,
+    # which names neither the input at fault nor the reason only one is allowed.
+    if [ "${#FILES_ARRAY[@]}" -gt 1 ]; then
+      fail "The 'files' input names ${#FILES_ARRAY[@]} reports, but the '$COMMAND' command uploads exactly one, since Teamscale stores one report per build name and version. Please upload each report separately, with its own build name or build version."
+    fi
     ;;
   *)
     fail "Unknown command '$COMMAND'. Please use either 'report' or 'vulnerability-report'."
@@ -111,8 +120,6 @@ else
   done
 fi
 
-# Transforming the space separated filenames into an array of filenames
-read -r -a FILES_ARRAY <<< "$FILES"
 ARGS+=( "${FILES_ARRAY[@]}" )
 
 "$LAUNCHER" "${ARGS[@]}"
